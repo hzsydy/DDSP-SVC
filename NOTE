@@ -1,0 +1,2 @@
+on win11 one need (with administrator)
+pip install git+https://github.com/liyaodev/fairseq.git

@@ -31,7 +31,7 @@ model:
 device: cuda # training device
 vocoder:
   type: 'nsf-hifigan'
-  ckpt: 'pretrain/nsf_hifigan/model'
+  ckpt: 'pretrain/nsf_hifigan/model.ckpt'
 infer:
   infer_step: 50
   method: 'euler' # 'euler', 'rk4'
