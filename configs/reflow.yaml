@@ -14,6 +14,7 @@ data:
   encoder_ckpt: pretrain/contentvec/checkpoint_best_legacy_500.pt
   train_path: data/train # Create a folder named "audio" under this path and put the audio clip in it
   valid_path: data/val # Create a folder named "audio" under this path and put the audio clip in it
+  specific_character: sayo
   extensions: # List of extension included in the data collection
     - wav
 model:
@@ -31,12 +32,12 @@ model:
 device: cuda # training device
 vocoder:
   type: 'nsf-hifigan'
-  ckpt: 'pretrain/nsf_hifigan/model'
+  ckpt: 'pretrain/nsf_hifigan/model.ckpt'
 infer:
   infer_step: 50
   method: 'euler' # 'euler', 'rk4'
 env:
-  expdir: exp/reflow-test
+  expdir: exp/reflow-test-6.3-sayo
   gpu_id: 0
 train:
   num_workers: 2 # If your cpu and gpu are both very strong, set to 0 may be faster!

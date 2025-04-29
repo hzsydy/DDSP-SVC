@@ -7,7 +7,7 @@ import torch
 import random
 from tqdm import tqdm
 from torch.utils.data import Dataset
-
+from IPython import embed
 
 def get_npy_shape(file_path):
     with open(file_path, "rb") as f:
@@ -73,6 +73,7 @@ def get_data_loaders(args, whole_audio=False):
         n_spk=args.model.n_spk,
         device=args.train.cache_device,
         fp16=args.train.cache_fp16,
+        specific_character=args.data.get("specific_character", None),
         use_aug=True)
     loader_train = torch.utils.data.DataLoader(
         data_train ,
@@ -90,6 +91,7 @@ def get_data_loaders(args, whole_audio=False):
         load_all_data=args.train.cache_all_data,
         whole_audio=True,
         extensions=args.data.extensions,
+        specific_character=args.data.get("specific_character", None),
         n_spk=args.model.n_spk)
     loader_valid = torch.utils.data.DataLoader(
         data_valid,
@@ -115,6 +117,7 @@ class AudioDataset(Dataset):
         device='cpu',
         fp16=False,
         use_aug=False,
+        specific_character=None,
     ):
         super().__init__()
         
@@ -127,7 +130,8 @@ class AudioDataset(Dataset):
             extensions=extensions,
             is_pure=True,
             is_sort=True,
-            is_ext=True
+            is_ext=True,
+            str_include=specific_character,
         )
         self.whole_audio = whole_audio
         self.use_aug = use_aug
